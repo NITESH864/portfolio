@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nitesh Gupta | Software Engineer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        // Set up Tailwind's dark mode to be controlled by a class
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glow-effect {
+            box-shadow: 0 0 5px #38bdf8, 0 0 10px #38bdf8, 0 0 15px #818cf8;
+        }
+
+        .section-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .section-fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body class="bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 transition-colors duration-300">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm fixed top-0 left-0 right-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <a href="#home" class="text-2xl font-bold gradient-text">NG</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="#about"
+                        class="text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</a>
+                    <a href="#skills"
+                        class="text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium">Skills</a>
+                    <a href="#projects"
+                        class="text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium">Projects</a>
+                    <a href="#contact"
+                        class="text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                    <button id="theme-toggle"
+                        class="ml-2 p-2 rounded-md text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700">
+                        <i id="theme-toggle-dark-icon" class="w-5 h-5" data-lucide="moon"></i>
+                        <i id="theme-toggle-light-icon" class="w-5 h-5 hidden" data-lucide="sun"></i>
+                    </button>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-theme-toggle"
+                        class="mr-2 p-2 rounded-md text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700">
+                        <i id="mobile-theme-toggle-dark-icon" class="w-5 h-5" data-lucide="moon"></i>
+                        <i id="mobile-theme-toggle-light-icon" class="w-5 h-5 hidden" data-lucide="sun"></i>
+                    </button>
+                    <button id="mobile-menu-button" type="button"
+                        class="bg-slate-200 dark:bg-slate-800 inline-flex items-center justify-center p-2 rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white hover:bg-slate-300 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 focus:ring-white">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu, show/hide based on menu state. -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#about"
+                    class="text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="#skills"
+                    class="text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium">Skills</a>
+                <a href="#projects"
+                    class="text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium">Projects</a>
+                <a href="#contact"
+                    class="text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 pt-20">
+
+        <!-- Hero Section -->
+        <section id="home" class="min-h-[calc(100vh-5rem)] flex items-center section-fade-in">
+            <div class="max-w-3xl">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white">
+                    Hi, I'm <span class="gradient-text">Nitesh Gupta</span>
+                </h1>
+                <h2 class="mt-2 text-2xl sm:text-3xl lg:text-4xl font-semibold text-slate-600 dark:text-slate-300">
+                    Software Engineer & Creative Technologist
+                </h2>
+                <p class="mt-4 text-lg text-slate-500 dark:text-slate-400">
+                    I craft elegant, responsive, and user-centric digital experiences. With a strong foundation in
+                    Python, Machine Learning,
+                    and Full-Stack Development, I’m passionate about pushing the boundaries of web technology and
+                    building applications that
+                    are not only functional but also beautiful and impactful.
+                </p>
+                <div class="mt-8 flex flex-wrap gap-4">
+                    <a href="#projects"
+                        class="inline-block bg-sky-500 text-white font-semibold px-6 py-3 rounded-lg shadow-lg hover:bg-sky-600 transition-colors duration-300">View
+                        My Work</a>
+                    <a href="#contact"
+                        class="inline-block bg-slate-700 text-white font-semibold px-6 py-3 rounded-lg shadow-lg hover:bg-slate-600 transition-colors duration-300">Get
+                        In Touch</a>
+                    <a href="https://drive.google.com/file/d/1oePjbbtM4Ote2WpEnUkkovUzDnflTMX2/view?usp=sharing"
+                        download="nitesh-gupta-resume.pdf"
+                        class="inline-block border-2 border-sky-500 text-sky-500 font-semibold px-6 py-3 rounded-lg shadow-lg hover:bg-sky-500 hover:text-white transition-colors duration-300">Download
+                        Resume</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-24 section-fade-in">
+            <h2 class="text-3xl font-bold text-center text-slate-900 dark:text-white mb-12">About Me</h2>
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/3">
+                    <img src="https://placehold.co/400x400/e2e8f0/334155?text=Nitesh" alt="Portrait of Nitesh Gupta"
+                        class="rounded-full mx-auto shadow-lg glow-effect"
+                        onerror="this.onerror=null;this.src='https://placehold.co/400x400/e2e8f0/334155?text=Nitesh';">
+                </div>
+                <div class="md:w-2/3">
+                    <p class="mb-4">
+                        Hello! I'm Nitesh Gupta, a passionate Computer Science Engineer and aspiring AI/ML Developer. My
+                        journey into technology
+                        started with curiosity about how systems work, which quickly evolved into building solutions
+                        that solve real-world
+                        problems.
+                    </p>
+                    <p class="mb-4">
+                        I have a strong foundation in Python, Machine Learning, and Full-Stack Development, and I enjoy
+                        transforming complex
+                        ideas into simple, efficient, and user-friendly applications. As a lifelong learner, I’m
+                        constantly exploring new tools
+                        and technologies to expand my skill set.
+                    </p>
+                    <p>
+                        Beyond coding, I enjoy exploring new ideas, continuous learning, and improving myself—whether
+                        through reading,
+                        experimenting, or engaging in creative projects.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-24 section-fade-in">
+            <h2 class="text-3xl font-bold text-center text-slate-900 dark:text-white mb-16">My Tech Stack</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 text-center">
+                <div
+                    class="flex flex-col items-center p-4 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                    <i data-lucide="languages" class="w-12 h-12 text-sky-500"></i>
+                    <span class="mt-2 font-medium">Python</span>
+                </div>
+                <div
+                    class="flex flex-col items-center p-4 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                    <i data-lucide="atom" class="w-12 h-12 text-sky-500"></i>
+                    <span class="mt-2 font-medium">SQL</span>
+                </div>
+                <div
+                    class="flex flex-col items-center p-4 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                    <i data-lucide="leaf" class="w-12 h-12 text-green-500"></i>
+                    <span class="mt-2 font-medium">JavaScript</span>
+                </div>
+                <div
+                    class="flex flex-col items-center p-4 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                    <i data-lucide="wind" class="w-12 h-12 text-teal-500"></i>
+                    <span class="mt-2 font-medium">Bootstrap CSS</span>
+                </div>
+                <div
+                    class="flex flex-col items-center p-4 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                    <i data-lucide="type" class="w-12 h-12 text-blue-500"></i>
+                    <span class="mt-2 font-medium">HTML</span>
+                </div>
+                <div
+                    class="flex flex-col items-center p-4 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                    <i data-lucide="database" class="w-12 h-12 text-orange-500"></i>
+                    <span class="mt-2 font-medium">Django</span>
+                </div>
+                <div
+                    class="flex flex-col items-center p-4 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                    <i data-lucide="sigma-square" class="w-12 h-12 text-indigo-500"></i>
+                    <span class="mt-2 font-medium">Numpy</span>
+                </div>
+                <div
+                    class="flex flex-col items-center p-4 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                    <i data-lucide="table-2" class="w-12 h-12 text-purple-500"></i>
+                    <span class="mt-2 font-medium">Pandas</span>
+                </div>
+                <div
+                    class="flex flex-col items-center p-4 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                    <i data-lucide="bar-chart-big" class="w-12 h-12 text-rose-500"></i>
+                    <span class="mt-2 font-medium">Matplotlib & Seaborn</span>
+                </div>
+                <div
+                    class="flex flex-col items-center p-4 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                    <i data-lucide="brain-circuit" class="w-12 h-12 text-amber-500"></i>
+                    <span class="mt-2 font-medium">Scikit-learn</span>
+                </div>
+                <div
+                    class="flex flex-col items-center p-4 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                    <i data-lucide="line-chart" class="w-12 h-12 text-emerald-500"></i>
+                    <span class="mt-2 font-medium">Streamlit</span>
+                </div>
+                <div
+                    class="flex flex-col items-center p-4 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                    <i data-lucide="layout-template" class="w-12 h-12 text-cyan-500"></i>
+                    <span class="mt-2 font-medium">Tkinter</span>
+                </div>
+                <div
+                    class="flex flex-col items-center p-4 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                    <i data-lucide="github" class="w-12 h-12 text-slate-500"></i>
+                    <span class="mt-2 font-medium">GitHub</span>
+                </div>
+                <div
+                    class="flex flex-col items-center p-4 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                    <i data-lucide="code" class="w-12 h-12 text-blue-600"></i>
+                    <span class="mt-2 font-medium">VS Code</span>
+                </div>
+                <div
+                    class="flex flex-col items-center p-4 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                    <i data-lucide="notebook" class="w-12 h-12 text-orange-600"></i>
+                    <span class="mt-2 font-medium">Jupyter Notebook</span>
+                </div>
+                <div
+                    class="flex flex-col items-center p-4 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                    <i data-lucide="server" class="w-12 h-12 text-green-600"></i>
+                    <span class="mt-2 font-medium">WampServer</span>
+                </div>
+                <div
+                    class="flex flex-col items-center p-4 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                    <i data-lucide="paintbrush-2" class="w-12 h-12 text-violet-500"></i>
+                    <span class="mt-2 font-medium">Canva</span>
+                </div>
+                <div
+                    class="flex flex-col items-center p-4 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                    <i data-lucide="brain-circuit" class="w-12 h-12 text-amber-500"></i>
+                    <span class="mt-2 font-medium">Scikit-learn</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-24 section-fade-in">
+            <h2 class="text-3xl font-bold text-center text-slate-900 dark:text-white mb-12">Featured Projects</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project Card 1 -->
+                <div
+                    class="bg-slate-100 dark:bg-slate-800 rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-transform duration-300">
+                    <img src="https://placehold.co/600x400/1e293b/38bdf8?text=IIM+Aayodhya" alt="IIM Aayodhya Project"
+                        class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">IIM Aayodhya Web</h3>
+                        <p class="text-slate-500 dark:text-slate-400 mb-4">Developed a front-end clone website using
+                            HTML, CSS, JavaScript, and Bootstrap.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span
+                                class="bg-sky-100 text-sky-800 dark:bg-sky-900 dark:text-sky-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">HTML</span>
+                            <span
+                                class="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">CSS</span>
+                            <span
+                                class="bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Bootstrap</span>
+                        </div>
+                        <div class="flex justify-end gap-4">
+                            <a href="https://nitesh864.github.io/iimaayodhya_College/"
+                                class="text-sky-500 hover:text-sky-600 dark:text-sky-400 dark:hover:text-sky-300 transition-colors"><i
+                                    data-lucide="github" class="w-6 h-6"></i></a>
+                            <a href="https://nitesh864.github.io/iimaayodhya_College/"
+                                class="text-sky-500 hover:text-sky-600 dark:text-sky-400 dark:hover:text-sky-300 transition-colors"><i
+                                    data-lucide="external-link" class="w-6 h-6"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project Card 2 -->
+                <div
+                    class="bg-slate-100 dark:bg-slate-800 rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-transform duration-300">
+                    <img src="https://placehold.co/600x400/1e293b/818cf8?text=Disease+Prediction"
+                        alt="Disease Prediction Project" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Disease Prediction System</h3>
+                        <p class="text-slate-500 dark:text-slate-400 mb-4">Django-based web system to predict diseases
+                            using input symptoms or uploaded medical files.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span
+                                class="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Django</span>
+                            <span
+                                class="bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Jupyter</span>
+                            <span
+                                class="bg-teal-100 text-teal-800 dark:bg-teal-900 dark:text-teal-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Bootstrap</span>
+                        </div>
+                        <div class="flex justify-end gap-4">
+                            <a href="https://github.com/NITESH864/Disease_Prediction_System"
+                                class="text-indigo-500 hover:text-indigo-600 dark:text-indigo-400 dark:hover:text-indigo-300 transition-colors"><i
+                                    data-lucide="github" class="w-6 h-6"></i></a>
+                            <a href="#"
+                                class="text-indigo-500 hover:text-indigo-600 dark:text-indigo-400 dark:hover:text-indigo-300 transition-colors"><i
+                                    data-lucide="external-link" class="w-6 h-6"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project Card 3 -->
+                <div
+                    class="bg-slate-100 dark:bg-slate-800 rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-transform duration-300">
+                    <img src="https://placehold.co/600x400/1e293b/a78bfa?text=School+Management"
+                        alt="School Management System Project" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">School Management System
+                        </h3>
+                        <p class="text-slate-500 dark:text-slate-400 mb-4">Responsive portal for managing students,
+                            teachers, and results using HTML, CSS, JavaScript, MySQL, Django.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span
+                                class="bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Django</span>
+                            <span
+                                class="bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">MySQL</span>
+                            <span
+                                class="bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Bootstrap</span>
+                        </div>
+                        <div class="flex justify-end gap-4">
+                            <a href="https://github.com/NITESH864/School-Management-System"
+                                class="text-purple-500 hover:text-purple-600 dark:text-purple-400 dark:hover:text-purple-300 transition-colors"><i
+                                    data-lucide="github" class="w-6 h-6"></i></a>
+                            <a href="#"
+                                class="text-purple-500 hover:text-purple-600 dark:text-purple-400 dark:hover:text-purple-300 transition-colors"><i
+                                    data-lucide="external-link" class="w-6 h-6"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- project card-4 -->
+                <div
+                    class="bg-slate-100 dark:bg-slate-800 rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-transform duration-300">
+                    <img src="https://placehold.co/600x400/1e293b/f43f5e?text=Heart+Prediction"
+                        alt="Heart Disease Prediction Project" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Heart Disease Prediction
+                        </h3>
+                        <p class="text-slate-500 dark:text-slate-400 mb-4">Streamlit-based web system to predict heart
+                            diseases using input symptoms.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span
+                                class="bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Jupyter
+                                Notebook</span>
+                            <span
+                                class="bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Scikit-learn</span>
+                            <span
+                                class="bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Streamlit</span>
+                        </div>
+                        <div class="flex justify-end gap-4">
+                            <a href="https://github.com/NITESH864/Heart_disease_prediction"
+                                class="text-rose-500 hover:text-rose-600 dark:text-rose-400 dark:hover:text-rose-300 transition-colors"><i
+                                    data-lucide="github" class="w-6 h-6"></i></a>
+                            <a href="https://nitesh864-heart-disease-prediction-main-vaf80i.streamlit.app/"
+                                class="text-rose-500 hover:text-rose-600 dark:text-rose-400 dark:hover:text-rose-300 transition-colors"><i
+                                    data-lucide="external-link" class="w-6 h-6"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- project card-5 -->
+                <div
+                    class="bg-slate-100 dark:bg-slate-800 rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-transform duration-300">
+                    <img src="https://placehold.co/600x400/1e293b/22c55e?text=TicTacToe" alt="TicTacToe Game Project"
+                        class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">TicTacToe Game
+                        </h3>
+                        <p class="text-slate-500 dark:text-slate-400 mb-4">Developed an interactive game using HTML,
+                            CSS, and JavaScript.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span
+                                class="bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">HTML</span>
+                            <span
+                                class="bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">CSS</span>
+                            <span
+                                class="bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">JavaScript</span>
+                        </div>
+                        <div class="flex justify-end gap-4">
+                            <a href="https://github.com/NITESH864/TicTacToe"
+                                class="text-green-500 hover:text-green-600 dark:text-green-400 dark:hover:text-green-300 transition-colors"><i
+                                    data-lucide="github" class="w-6 h-6"></i></a>
+                            <a href="https://nitesh864.github.io/TicTacToe/"
+                                class="text-green-500 hover:text-green-600 dark:text-green-400 dark:hover:text-green-300 transition-colors"><i
+                                    data-lucide="external-link" class="w-6 h-6"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project Card 6 -->
+                <div
+                    class="bg-slate-100 dark:bg-slate-800 rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-transform duration-300">
+                    <img src="https://placehold.co/600x400/1e293b/34d399?text=Calculator" alt="Calculator Project"
+                        class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Calculator
+                        </h3>
+                        <p class="text-slate-500 dark:text-slate-400 mb-4">Developed a functional and responsive
+                            calculator using HTML, CSS, and JavaScript.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span
+                                class="bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">HTML</span>
+                            <span
+                                class="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">CSS</span>
+                            <span
+                                class="bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">JavaScript</span>
+                        </div>
+                        <div class="flex justify-end gap-4">
+                            <a href="https://github.com/NITESH864/Calculator"
+                                class="text-emerald-500 hover:text-emerald-600 dark:text-emerald-400 dark:hover:text-emerald-300 transition-colors"><i
+                                    data-lucide="github" class="w-6 h-6"></i></a>
+                            <a href="https://nitesh864.github.io/Calculator/"
+                                class="text-emerald-500 hover:text-emerald-600 dark:text-emerald-400 dark:hover:text-emerald-300 transition-colors"><i
+                                    data-lucide="external-link" class="w-6 h-6"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-24 section-fade-in">
+            <div class="max-w-xl mx-auto text-center">
+                <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-4">Let's Connect</h2>
+                <p class="text-slate-500 dark:text-slate-400 mb-8">
+                    I'm currently open to new opportunities and collaborations. Feel free to reach out if you have a
+                    project in mind or just want to say hello!
+                </p>
+                <a href="mailto:niteshgupta5665@gmail.com"
+                    class="inline-block bg-sky-500 text-white font-semibold px-8 py-4 rounded-lg shadow-lg hover:bg-sky-600 transition-colors duration-300 text-lg">
+                    Say Hello
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-200/50 dark:bg-slate-800/50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-slate-500 dark:text-slate-400">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="https://github.com/NITESH864" class="hover:text-slate-800 dark:hover:text-white"><i
+                        data-lucide="github" class="w-6 h-6"></i></a>
+                <a href="https://www.linkedin.com/in/niteshgupta55/"
+                    class="hover:text-slate-800 dark:hover:text-white"><i data-lucide="linkedin"
+                        class="w-6 h-6"></i></a>
+                <a href="#" class="hover:text-slate-800 dark:hover:text-white"><i data-lucide="instagram"
+                        class="w-6 h-6"></i></a>
+            </div>
+            <p>&copy; 2025 Nitesh Gupta. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scroll-to-top Button -->
+    <button id="scrollToTopBtn"
+        class="hidden fixed bottom-5 right-5 bg-sky-500 text-white p-3 rounded-full shadow-lg hover:bg-sky-600 transition-opacity duration-300">
+        <i data-lucide="arrow-up" class="w-6 h-6"></i>
+    </button>
+
+    <script>
+        // --- Initialize Lucide Icons ---
+        lucide.createIcons();
+
+        // --- Theme Toggling Logic ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const mobileThemeToggleBtn = document.getElementById('mobile-theme-toggle');
+        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+        const mobileThemeToggleDarkIcon = document.getElementById('mobile-theme-toggle-dark-icon');
+        const mobileThemeToggleLightIcon = document.getElementById('mobile-theme-toggle-light-icon');
+
+        // Function to update icon visibility
+        const updateIcons = (isDarkMode) => {
+            if (isDarkMode) {
+                themeToggleDarkIcon.classList.add('hidden');
+                themeToggleLightIcon.classList.remove('hidden');
+                mobileThemeToggleDarkIcon.classList.add('hidden');
+                mobileThemeToggleLightIcon.classList.remove('hidden');
+            } else {
+                themeToggleDarkIcon.classList.remove('hidden');
+                themeToggleLightIcon.classList.add('hidden');
+                mobileThemeToggleDarkIcon.classList.remove('hidden');
+                mobileThemeToggleLightIcon.classList.add('hidden');
+            }
+        };
+
+        // Check for saved theme in localStorage or system preference and apply it
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            updateIcons(true);
+        } else {
+            document.documentElement.classList.remove('dark');
+            updateIcons(false);
+        }
+
+        const toggleHandler = () => {
+            const isDarkMode = document.documentElement.classList.toggle('dark');
+            localStorage.theme = isDarkMode ? 'dark' : 'light';
+            updateIcons(isDarkMode);
+        };
+
+        themeToggleBtn.addEventListener('click', toggleHandler);
+        mobileThemeToggleBtn.addEventListener('click', toggleHandler);
+
+        // --- Mobile Menu Toggle ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            // Toggle icons
+            mobileMenuButton.querySelectorAll('svg').forEach(icon => icon.classList.toggle('hidden'));
+        });
+
+        // Close mobile menu when a link is clicked
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenuButton.querySelector('svg:first-child').classList.remove('hidden');
+                mobileMenuButton.querySelector('svg:last-child').classList.add('hidden');
+            });
+        });
+
+        // --- Scroll-to-Top Button ---
+        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+        window.onscroll = function () {
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                scrollToTopBtn.classList.remove('hidden');
+            } else {
+                scrollToTopBtn.classList.add('hidden');
+            }
+        };
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // --- Section Fade-in on Scroll ---
+        const sections = document.querySelectorAll('.section-fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+    </script>
+</body>
+
+</html>
